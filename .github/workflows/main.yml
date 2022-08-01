@@ -36,6 +36,8 @@ jobs:
           cd jupyter_github_action
 
           jupyter execute download.ipynb
+
+          cd ..
         shell: bash
 
         
@@ -43,8 +45,6 @@ jobs:
       - id: commit
         name: Commit files
         run:
-          cd ..
-
           git config --local user.name actions-user
 
           git config --local user.email "actions@github.com"
