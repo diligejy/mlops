@@ -1,3 +1,5 @@
+[![CI-Jupyter](https://github.com/diligejy/mlops/actions/workflows/main.yml/badge.svg)](https://github.com/diligejy/mlops/actions/workflows/main.yml)
+
 # mlops
 
 ## Jupyter Notebook Automation
