@@ -32,7 +32,7 @@ jobs:
       - run: pip install -r requirements.txt
       - id: jupyter
         name: Jupyter Notebook Execution
-        run: jupyter execute download.ipynb
+        run: jupyter execute jupyter_github_action/download.ipynb
         shell: bash
 
         
