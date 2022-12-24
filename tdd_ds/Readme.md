@@ -1,0 +1,1 @@
+[Lecture Video](https://youtu.be/sfI1oDj6syY?list=PLnK6m_JBRVNoYEer9hBmTNwkYB3gmbOPO)
