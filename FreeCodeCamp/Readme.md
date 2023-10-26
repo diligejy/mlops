@@ -1,0 +1,1 @@
+1. [Machine Learning & Neural Networks without Libraries – No Black Box Course](https://youtu.be/3wwiOSxDAmg)
