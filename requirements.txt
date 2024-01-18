@@ -3,3 +3,4 @@ nbclient
 pandas
 pytest 
 pytest-cov
+pylint
