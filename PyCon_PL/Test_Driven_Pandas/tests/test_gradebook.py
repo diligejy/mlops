@@ -1,9 +1,15 @@
 import pandas as pd 
 from typing import cast
 
+def _create_group(raw_students_group:pd.DataFrame) -> pd.DataFrame:
+    result = pd.DataFrame()
+    return result.assign(
+        net_id = raw_students_group["NetID"].str.lower(),
+    )
+
 def generate_gradebook(students_df:pd.DataFrame) -> dict[int, pd.DataFrame]:
     return {
-        cast(int, group): pd.DataFrame()
+        cast(int, group): _create_group(raw_students_group=table)
         for group, table in students_df.groupby("Group")
     }
     
