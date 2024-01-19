@@ -39,4 +39,25 @@ def test_results_are_grouped_by_student_group_for_students_in_multiple_group():
     assert list(result.keys()) == [1, 2]
     
     
-    
+def test_results_group_contains_students_net_id_lowercase():
+    students = [
+        {
+            "ID": 1,
+            "Name": "Doe, John",
+            "NetID": "JXD12345",
+            "Email Adress": "JOHN.DOE@EXAMPLE.EDU",
+            "Group": 1,
+        },
+        {
+            "ID": 2,
+            "Name": "Doe, Second",
+            "NetID": "SXD54321",
+            "Email Adress": "SECOND.DOE@EXAMPLE.EDU",
+            "Group": 1,
+        },
+    ]
+    students_df = pd.DataFrame(data=students).set_index("ID")
+
+    result = generate_gradebook(students_df=students_df)
+
+    assert result[1]["net_id"].to_list() == ["jxd12345", "sxd54321"]
