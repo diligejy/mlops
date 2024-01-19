@@ -1,6 +1,6 @@
 import pandas as pd 
 
-def test_x():
+def test_results_are_grouped_by_student_group():
     students = [{
         "ID" : 1,
         "Name" : "Doe, John",
@@ -9,4 +9,6 @@ def test_x():
         "Group" : 1,
     }]
     students_df = pd.DataFrame(data=students).set_index("ID")
-    assert False
+    
+    result = {}
+    assert list(result.keys()) == [1]
