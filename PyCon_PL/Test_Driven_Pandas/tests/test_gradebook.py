@@ -15,3 +15,24 @@ def test_results_are_grouped_by_student_group():
     
     result = generate_gradebook(students_df=students_df)
     assert list(result.keys()) == [1]
+    
+def test_results_are_grouped_by_student_group_for_students_in_multiple_group():
+    students = [{
+        "ID" : 1,
+        "Name" : "Doe, John",
+        "NetID" : "JXD12345",
+        "Email Address" : "JOHN.DOE@EXAMPLE.EDU",
+        "Group" : 1,
+    },{
+        "ID" : 2,
+        "Name" : "Alec, Curry	",
+        "NetID" : "AMC53511",
+        "Email Address" : "ALEC.CURRY@EXAMPLE.EDU",
+        "Group" : 2,
+    }]
+    students_df = pd.DataFrame(data=students).set_index("ID")
+    result = generate_gradebook(students_df=students_df)
+    assert list(result.keys()) == [1, 2]
+    
+    
+    
