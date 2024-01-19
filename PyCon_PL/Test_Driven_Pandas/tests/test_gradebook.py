@@ -1,7 +1,7 @@
 import pandas as pd 
 
 def generate_gradebook(students_df:pd.DataFrame) -> dict[int, pd.DataFrame]:
-    return {}
+    return {1: pd.DataFrame()}
 
 def test_results_are_grouped_by_student_group():
     students = [{
