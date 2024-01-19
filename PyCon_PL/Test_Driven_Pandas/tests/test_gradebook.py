@@ -1,8 +1,12 @@
 import pandas as pd 
+from typing import cast
 
 def generate_gradebook(students_df:pd.DataFrame) -> dict[int, pd.DataFrame]:
-    return {1: pd.DataFrame()}
-
+    return {
+        cast(int, group): pd.DataFrame()
+        for group, table in students_df.groupby("Group")
+    }
+    
 def test_results_are_grouped_by_student_group():
     students = [{
         "ID" : 1,
@@ -25,7 +29,7 @@ def test_results_are_grouped_by_student_group_for_students_in_multiple_group():
         "Group" : 1,
     },{
         "ID" : 2,
-        "Name" : "Alec, Curry	",
+        "Name" : "Alec, Curry",
         "NetID" : "AMC53511",
         "Email Address" : "ALEC.CURRY@EXAMPLE.EDU",
         "Group" : 2,
