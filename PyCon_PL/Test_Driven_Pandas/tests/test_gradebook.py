@@ -28,8 +28,8 @@ def generate_gradebook(students_df:pd.DataFrame, homework_exams_df: Optional[pd.
         right_index=True
     )
     return {
-        cast(int, group): _create_group(students_with_scores=students_with_scores)
-        for group, table in students_df.groupby("Group")
+        cast(int, group): _create_group(students_with_scores=table)
+        for group, table in students_with_scores.groupby("Group")
     }
     
 def test_results_are_grouped_by_student_group_for_students_in_one_group():
