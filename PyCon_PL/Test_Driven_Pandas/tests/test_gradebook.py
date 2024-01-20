@@ -67,7 +67,7 @@ def two_students_in_the_same_group() -> pd.DataFrame():
     ]
     return pd.DataFrame(data=students).set_index("NetID")
 
-def test_results_are_grouped_by_student_group_for_students_in_multiple_group():
+def test_results_are_grouped_by_student_group_for_students_in_multiple_groups():
     students = [{
         "ID" : 1,
         "Name" : "Doe, John",
@@ -76,14 +76,16 @@ def test_results_are_grouped_by_student_group_for_students_in_multiple_group():
         "Group" : 1,
     },{
         "ID" : 2,
-        "Name" : "Alec, Curry",
-        "NetID" : "AMC53511",
+        "Name" : "Doe, Second",
+        "NetID" : "SXD54321",
         "Email Address" : "ALEC.CURRY@EXAMPLE.EDU",
         "Group" : 2,
     }]
     students_df = pd.DataFrame(data=students).set_index("NetID")
     result = generate_gradebook(students_df=students_df)
     assert list(result.keys()) == [1, 2]
+    assert result[1]['net_id'].tolist() == ['jxd12345']
+    assert result[2]['net_id'].tolist() == ['sxd54321']
     
 def test_results_group_contains_students_net_id_lowercase(two_students_in_the_same_group):
     

@@ -2,3 +2,4 @@
     - [Folder](./Test_Driven_Pandas/)
     - [Link](https://belazy.dev/talks/test-driven-pandas/)
     - [Pytest Fixture Ref](https://twpower.github.io/19-about-python-test-fixture)
+    - [Typing Module - Optional](https://www.daleseo.com/python-typing/)
