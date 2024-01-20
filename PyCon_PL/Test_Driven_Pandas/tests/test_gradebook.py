@@ -4,12 +4,12 @@ from typing import cast
 
 def _create_group(raw_students_group:pd.DataFrame) -> pd.DataFrame:
     result = pd.DataFrame()
-    return result.assign(
+    result = result.assign(
         net_id = raw_students_group["NetID"].str.lower(),
         email_address = raw_students_group['Email Address'].str.lower(),
-        first_name=raw_students_group["Name"].str.split(", ", expand=True)[1],
-        last_name=raw_students_group["Name"].str.split(", ", expand=True)[0],
     )
+    result[['last_name', 'first_name']] = raw_students_group['Name'].str.split(", ", expand=True)
+    return result 
 
 def generate_gradebook(students_df:pd.DataFrame) -> dict[int, pd.DataFrame]:
     return {
