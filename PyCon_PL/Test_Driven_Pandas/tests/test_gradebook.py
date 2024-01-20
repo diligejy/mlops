@@ -3,21 +3,24 @@ import pytest
 from typing import cast
 
 def _create_group(raw_students_group:pd.DataFrame) -> pd.DataFrame:
-    result = pd.DataFrame()
+    result = pd.DataFrame(index=raw_students_group.index)
     result = result.assign(
-        net_id = raw_students_group["NetID"].str.lower(),
+        net_id = raw_students_group.index,
         email_address = raw_students_group['Email Address'].str.lower(),
     )
     result[['last_name', 'first_name']] = raw_students_group['Name'].str.split(", ", expand=True)
     return result 
 
 def generate_gradebook(students_df:pd.DataFrame) -> dict[int, pd.DataFrame]:
+    print(
+        'This is index', students_df.index)
+    students_df.index = students_df.index.str.lower()
     return {
         cast(int, group): _create_group(raw_students_group=table)
         for group, table in students_df.groupby("Group")
     }
     
-def test_results_are_grouped_by_student_group():
+def test_results_are_grouped_by_student_group_for_students_in_one_group():
     students = [{
         "ID" : 1,
         "Name" : "Doe, John",
@@ -25,7 +28,7 @@ def test_results_are_grouped_by_student_group():
         "Email Address" : "JOHN.DOE@EXAMPLE.EDU",
         "Group" : 1,
     }]
-    students_df = pd.DataFrame(data=students).set_index("ID")
+    students_df = pd.DataFrame(data=students).set_index("NetID")
     
     result = generate_gradebook(students_df=students_df)
     assert list(result.keys()) == [1]
@@ -50,7 +53,7 @@ def two_students_in_the_same_group() -> pd.DataFrame():
             "Group": 1,
         }
     ]
-    return pd.DataFrame(data=students).set_index("ID")
+    return pd.DataFrame(data=students).set_index("NetID")
 
 def test_results_are_grouped_by_student_group_for_students_in_multiple_group():
     students = [{
@@ -66,7 +69,7 @@ def test_results_are_grouped_by_student_group_for_students_in_multiple_group():
         "Email Address" : "ALEC.CURRY@EXAMPLE.EDU",
         "Group" : 2,
     }]
-    students_df = pd.DataFrame(data=students).set_index("ID")
+    students_df = pd.DataFrame(data=students).set_index("NetID")
     result = generate_gradebook(students_df=students_df)
     assert list(result.keys()) == [1, 2]
     
